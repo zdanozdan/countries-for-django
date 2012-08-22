@@ -82,3 +82,5 @@ get_country_info_list
           {{ c.name_local }}
         {% endfor %}
     	"""
+
+TODO:   {% get_country_info_list for COUNTRIES as countries %}
