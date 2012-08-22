@@ -47,3 +47,38 @@ Create post form:
         </select>
     <input type="submit" value="Switch Country"/>
     </form> 
+
+Template tags: 
+get_current_country
+
+	 @register.tag("get_current_country")
+	 def do_get_current_country(parser, token):
+	 """
+	 This will store the current language in the context.
+
+    	 Usage::
+         {% get_current_country as country %}
+
+    	 This will fetch the currently active language and
+    	 put it's value into the ``language`` context
+    	 variable.
+    	 """
+get_country_info_list
+
+	@register.tag("get_country_info_list")
+	def do_get_country_info_list(parser, token):
+    	"""
+    	This will store a list of country information dictionaries for the given
+    	country codes in a context variable. The country codes can be specified
+    	either as a list of strings or a settings.COUNTRIES style tuple (or any
+    	sequence of sequences whose first items are country codes).
+
+    	Usage::
+
+        {% get_country_info_list for COUNTRIES as countries %}
+        {% for c in countries %}
+          {{ c.code }}
+          {{ c.name }}
+          {{ c.name_local }}
+        {% endfor %}
+    	"""
