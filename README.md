@@ -54,13 +54,13 @@ get_current_country
 	 @register.tag("get_current_country")
 	 def do_get_current_country(parser, token):
 	 """
-	 This will store the current language in the context.
+	 This will store the current country in the context.
 
     	 Usage::
          {% get_current_country as country %}
 
-    	 This will fetch the currently active language and
-    	 put it's value into the ``language`` context
+    	 This will fetch the currently active country and
+    	 put it's value into the ``country`` context
     	 variable.
     	 """
 get_country_info_list

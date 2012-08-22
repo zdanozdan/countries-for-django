@@ -67,8 +67,8 @@ def do_get_current_country(parser, token):
 @register.tag("get_country_info_list")
 def do_get_country_info_list(parser, token):
     """
-    This will store a list of language information dictionaries for the given
-    language codes in a context variable. The country codes can be specified
+    This will store a list of country information dictionaries for the given
+    country codes in a context variable. The country codes can be specified
     either as a list of strings or a settings.COUNTRIES style tuple (or any
     sequence of sequences whose first items are country codes).
 
