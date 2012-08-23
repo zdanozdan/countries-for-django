@@ -83,4 +83,22 @@ get_country_info_list
         {% endfor %}
     	"""
 
-TODO:   {% get_country_info_list for COUNTRIES as countries %}
+get_available_countries
+
+	@register.tag("get_available_countries")
+	def do_get_available_languages(parser, token):
+    	"""
+    	This will store a list of available countries
+    	in the context.
+
+    	Usage::
+
+		{% get_available_countries as countries %}
+        	{% for country in countries %}
+        	...
+        	{% endfor %}
+
+    	This will just pull the COUNTRIES setting from
+    	your setting file (or the default settings) and
+    	put it into the named variable.
+    	"""

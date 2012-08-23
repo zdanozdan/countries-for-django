@@ -1,11 +1,21 @@
 from django.template import (Node, Variable, TemplateSyntaxError,
     TokenParser, Library, TOKEN_TEXT, TOKEN_VAR)
+from django.utils import translation
 
 from django.contrib.sessions.backends.db import SessionStore
 
 from ..locale.countries_info import COUNTRY_INFO
 
 register = Library()
+
+class GetAvailableCountriesNode(Node):
+    def __init__(self, variable):
+        self.variable = variable
+
+    def render(self, context):
+        from django.conf import settings
+        context[self.variable] = [(k, translation.ugettext(v)) for k, v in settings.COUNTRIES]
+        return ''
 
 class GetCurrentCountryNode(Node):
     def __init__(self, variable):
@@ -85,5 +95,27 @@ def do_get_country_info_list(parser, token):
     if len(args) != 5 or args[1] != 'for' or args[3] != 'as':
         raise TemplateSyntaxError("'%s' requires 'for sequence as variable' (got %r)" % (args[0], args[1:]))
 
-    #return "OK"
     return GetCountryInfoListNode(args[2], args[4])
+
+@register.tag("get_available_countries")
+def do_get_available_languages(parser, token):
+    """
+    This will store a list of available countries
+    in the context.
+
+    Usage::
+
+        {% get_available_countries as countries %}
+        {% for country in countries %}
+        ...
+        {% endfor %}
+
+    This will just pull the COUNTRIES setting from
+    your setting file (or the default settings) and
+    put it into the named variable.
+    """
+    args = token.contents.split()
+    if len(args) != 3 or args[1] != 'as':
+        raise TemplateSyntaxError("'get_available_countries' requires 'as variable' (got %r)" % args)
+    return GetAvailableCountriesNode(args[2])
+
