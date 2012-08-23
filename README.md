@@ -25,11 +25,26 @@ Add the countries you need to your settings.py as well as cookie name (session s
 Next add urls with prefix of yours choice
     (r'^country/', include('countries.urls')),
 
+Finally enable countries in settings.py
+
+	INSTALLED_APPS = (
+	     ...      
+    	     'countries',      
+	     ...
+    	     # 'django.contrib.admindocs',
+	)
+
 Usage:
 
 Create post form:
 
+    {% load countries %}	
     {% get_current_country as country %}
+
+    """
+    this will get list of countries specified in settings.py or default list if settings are empty
+    """
+    {% get_available_countries as COUNTRIES %}
 
     <ul>
     {% get_country_info_list for COUNTRIES as countries %}
