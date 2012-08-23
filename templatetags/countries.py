@@ -22,8 +22,7 @@ class GetCurrentCountryNode(Node):
         self.variable = variable
 
     def get_current_country(self, context):
-        s = SessionStore(session_key=context.get('request').COOKIES.get('sessionid'))
-        return s.get('django_country')
+        return context.get('request').session.get('django_country')
 
     def render(self, context):
         context[self.variable] = self.get_current_country(context)
