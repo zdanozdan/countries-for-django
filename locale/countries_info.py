@@ -10,6 +10,8 @@ def to_lower():
         f.write(str(COUNTRY_INFO[v]))
         f.write(",\r\n")
 
+COUNTRY_LIST_EU = ('au','be','bg','cy','cz','dk','ee','fi','fr','de','gr','hu','ie','it','lv','lt','lu','mt','nl','pl','pt','ro','sk','si','es','se','gb')
+
 """
 consider adding local names in local aphabet maybe, so far so good
 """
