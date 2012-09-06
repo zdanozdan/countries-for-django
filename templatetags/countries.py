@@ -1,12 +1,18 @@
-from django.template import (Node, Variable, TemplateSyntaxError,
-    TokenParser, Library, TOKEN_TEXT, TOKEN_VAR)
+from django.template import (Node, Variable, TemplateSyntaxError, Library)
 from django.utils import translation
 
 from django.contrib.sessions.backends.db import SessionStore
 
 from ..locale.countries_info import COUNTRY_INFO
+from ..locale.countries_info import COUNTRY_LIST_EU
+
+import logging
 
 register = Library()
+
+@register.filter
+def is_eu_country(country_code):
+    return country_code in COUNTRY_LIST_EU
 
 class GetAvailableCountriesNode(Node):
     def __init__(self, variable):
@@ -58,7 +64,7 @@ class GetCountryInfoListNode(Node):
 @register.tag("get_current_country")
 def do_get_current_country(parser, token):
     """
-    This will store the current language in the context.
+    This will store the current country in the context.
 
     Usage::
 
