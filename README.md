@@ -117,3 +117,14 @@ get_available_countries
     	your setting file (or the default settings) and
     	put it into the named variable.
     	"""
+
+Filters:
+
+is_eu_country filter will check if current country is in one of 27 member state
+	Usage::
+		{% get_current_country as country %}
+		{% if country|is_eu_country %}
+		EU country
+		{% else %}	
+		NON EU country
+		{% endif %}
