@@ -1,11 +1,14 @@
-from django.db import models
+#from django.db.models.fields import ChoiceField
 
-class CountryField(models.CharField):
+from django import forms
+
+class CountryField(forms.ChoiceField):
     def __init__(self, *args, **kwargs):
-        kwargs.setdefault('maxlength', 2)
+        from countries import COUNTRIES
+        #kwargs.setdefault('maxlength', 2)
         kwargs.setdefault('choices', COUNTRIES)
 
         super(CountryField, self).__init__(*args, **kwargs)
 
     def get_internal_type(self):
-        return "CharField"
+        return "ChoiceField"
